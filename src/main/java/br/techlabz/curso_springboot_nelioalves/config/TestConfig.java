@@ -11,10 +11,12 @@ import org.springframework.context.annotation.Profile;
 import br.techlabz.curso_springboot_nelioalves.CursoSpringbootNelioalvesApplication;
 import br.techlabz.curso_springboot_nelioalves.entities.Category;
 import br.techlabz.curso_springboot_nelioalves.entities.Order;
+import br.techlabz.curso_springboot_nelioalves.entities.OrderItem;
 import br.techlabz.curso_springboot_nelioalves.entities.Product;
 import br.techlabz.curso_springboot_nelioalves.entities.User;
 import br.techlabz.curso_springboot_nelioalves.entities.enums.OrderStatus;
 import br.techlabz.curso_springboot_nelioalves.repositories.CategoryRepository;
+import br.techlabz.curso_springboot_nelioalves.repositories.OrderItemRepository;
 import br.techlabz.curso_springboot_nelioalves.repositories.OrderRepository;
 import br.techlabz.curso_springboot_nelioalves.repositories.ProductRepository;
 import br.techlabz.curso_springboot_nelioalves.repositories.UserRepository;
@@ -36,6 +38,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 
 	TestConfig(CursoSpringbootNelioalvesApplication cursoSpringbootNelioalvesApplication) {
@@ -77,6 +82,11 @@ public class TestConfig implements CommandLineRunner {
 		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"),OrderStatus.CANCELED, u1);
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
+		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 		
 	}
 	
