@@ -12,6 +12,7 @@ import br.techlabz.curso_springboot_nelioalves.entities.User;
 import br.techlabz.curso_springboot_nelioalves.repositories.UserRepository;
 import br.techlabz.curso_springboot_nelioalves.services.exceptions.DatabaseException;
 import br.techlabz.curso_springboot_nelioalves.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 
 
 @Service
@@ -46,13 +47,17 @@ public class UserService {
 		
 	}
 	
-	public User update(Long id, User obj) {
-		User entity = repository.getReferenceById(id);
-		entity.setName(obj.getName());
-		entity.setEmail(obj.getEmail());
-		entity.setPhone(obj.getPhone());		
+	public User update(Long id, User obj) {		
+		try {
+			User entity = repository.getReferenceById(id);
+			entity.setName(obj.getName());
+			entity.setEmail(obj.getEmail());
+			entity.setPhone(obj.getPhone());	
+			return repository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 		
-		return repository.save(entity);
 	}
 
 }
