@@ -2,7 +2,6 @@ package br.techlabz.curso_springboot_nelioalves.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 

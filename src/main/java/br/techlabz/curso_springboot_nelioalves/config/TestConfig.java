@@ -12,6 +12,7 @@ import br.techlabz.curso_springboot_nelioalves.CursoSpringbootNelioalvesApplicat
 import br.techlabz.curso_springboot_nelioalves.entities.Category;
 import br.techlabz.curso_springboot_nelioalves.entities.Order;
 import br.techlabz.curso_springboot_nelioalves.entities.OrderItem;
+import br.techlabz.curso_springboot_nelioalves.entities.Payment;
 import br.techlabz.curso_springboot_nelioalves.entities.Product;
 import br.techlabz.curso_springboot_nelioalves.entities.User;
 import br.techlabz.curso_springboot_nelioalves.entities.enums.OrderStatus;
@@ -87,6 +88,12 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
 		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
+		
+		Payment pay1 = new Payment(null, Instant.parse("2019-07-21T13:42:15Z"), o2);
+		o2.setPayment(pay1);
+		
+		orderRepository.save(o2);
 		
 	}
 	
